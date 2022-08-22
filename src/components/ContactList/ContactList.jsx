@@ -2,19 +2,21 @@ import React from 'react';
 import ContactListItem from 'components/ContactListItem';
 import { useSelector } from 'react-redux';
 import { getFilteredContacts } from 'redux/selectors';
+import { useFetchContactsQuery } from 'redux/contactsApiSlice';
 import PropTypes from 'prop-types';
 
 const ContactList = () => {
-  const contacts = useSelector(state => state.contacts.items);
   const value = useSelector(getFilteredContacts);
+  const { data = [] } = useFetchContactsQuery();
 
   const getFilteredNames = () => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(value)
+    const normalizedValue = value.toLowerCase().trim();
+    return data.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedValue)
     );
   };
 
-  let searchContact = value === '' ? contacts : getFilteredNames();
+  let searchContact = value === '' ? data : getFilteredNames();
 
   return (
     <div>

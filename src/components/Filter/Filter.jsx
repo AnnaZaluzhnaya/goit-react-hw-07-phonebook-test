@@ -9,10 +9,10 @@ const Filter = () => {
   const dispatch = useDispatch();
   const value = useSelector(getFilteredContacts);
 
-  const inputChange = event => {
-    const changeValue = event.target.value;
-    dispatch(changeFilter(changeValue));
-  };
+  // const inputChange = event => {
+  //   const changeValue = event.target.value;
+  //   dispatch(changeFilter(changeValue));
+  // };
 
   return (
     <div className={style.filter}>
@@ -23,7 +23,7 @@ const Filter = () => {
           type="text"
           name="number"
           value={value}
-          onChange={inputChange}
+          onChange={event => dispatch(changeFilter(event.target.value))}
         />
       </label>
     </div>

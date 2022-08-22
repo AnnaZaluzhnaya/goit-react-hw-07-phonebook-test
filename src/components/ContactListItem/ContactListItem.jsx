@@ -1,10 +1,13 @@
-import { removeContact } from 'redux/slice';
-import { useDispatch } from 'react-redux';
+// import { removeContact } from 'redux/slice';
+import { useRemoveContactMutation } from 'redux/contactsApiSlice';
+// import { useDispatch } from 'react-redux';
 import style from './ContactListItem.module.css';
 import PropTypes from 'prop-types';
 
 const ContactListItem = ({ id, number, name }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const [removeContact] = useRemoveContactMutation();
+
   return (
     <li key={id} className={style.item}>
       {name}: {number}
@@ -12,7 +15,7 @@ const ContactListItem = ({ id, number, name }) => {
         <button
           type="button"
           className={style.removeBtn}
-          onClick={() => dispatch(removeContact(id))}
+          onClick={() => removeContact(id)}
         >
           Delete
         </button>
